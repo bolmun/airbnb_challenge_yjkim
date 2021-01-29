@@ -8,7 +8,7 @@ class Movie(CoreModel):
 
     title = models.CharField(max_length=120)
     year = models.IntegerField()
-    cover_image = models.ImageField(null=True, blank=True)
+    cover_image = models.ImageField(upload_to="movie_photos")
     rating = models.IntegerField()
     category = models.ForeignKey(
         "categories.Category", on_delete=models.CASCADE, related_name="movies")

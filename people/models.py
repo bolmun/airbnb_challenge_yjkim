@@ -17,7 +17,7 @@ class Person(CoreModel):
   )
 
   name = models.CharField(max_length=120)
-  photo = models.ImageField(null=True, blank=True)
+  photo = models.ImageField(upload_to="person_photos")
   kind = models.CharField(max_length=15, choices=KIND_CHOICES)
 
   def __str__(self):
