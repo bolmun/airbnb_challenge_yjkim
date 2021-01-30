@@ -23,6 +23,26 @@
     {% include "mixins/fav_button.html" with obj=book kind='book' %}
   {% endif %}
 </div>
+
+{% if user.is_authenticated %}
+<div class="flex">
+  <a class="bg-blue-400 hover:bg-blue-600 text-white font-bold mt-4 py-2 px-4 rounded" href="{% url 'reviews:create-book' book.pk %}">Write Review</a>
+</div>
+{% endif %}
+
+<div>
+  <span>{{book.reviews.count}}</span>
+  <span>review{{book.reviews.count|pluralize}}</span>
+</div>
+<div>
+  {% for review in book.reviews.all %}
+    {{review.created_by}}
+    {{review.created_at}}
+    {{review.text}}
+    {{review.rating}}
+  {% endfor %}
+</div>
+
 </div>
 
 {% endblock content %}
