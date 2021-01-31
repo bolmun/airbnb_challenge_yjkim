@@ -1,9 +1,13 @@
-{% extends "base.html" %}
+<div class="mt-12 mb-3 font-semibold">
+  <span>{{content.reviews.count}}</span>
+  <span>review{{content.reviews.count|pluralize}}</span>
+</div>
+{% for review in content.reviews.all %}
+<div class="border-b border-gray-300 py-2">
+    <span class="border border-gray-500 text-gray-700 text-sm rounded-md px-1 py-0">{{review.created_by}}</span>
+    <span class="text-gray-600 font-semibold text-sm">{{review.created_at}}</span>
+    <span><i class="fas fa-star text-orange-500 ml-2 mr-1 text-xs"></i><span class="font-semibold text-sm">{{review.rating}}</span>
+    <h5 class="text-md">{{review.text}}</h5>
+</div>
+{% endfor %}
 
-{% block page_title %}
-  Reviews
-{% endblock page_title %}
-
-{% block content %}
-<h1>hello this is review page</h1>
-{% endblock content %}

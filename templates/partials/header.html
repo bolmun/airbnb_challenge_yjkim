@@ -1,11 +1,20 @@
-  <header class="flex justify-around bg-blue-400 text-white py-4">
-    <a href="{% url 'core:home' %}">Home</a>
-    <a href="{% url 'core:search' %}">Search</a>
+<header class="container fixed inset-x-0 bg-gray-100 bg-opacity-75 top-0 max-w-full flex item-center justify-between  py-4  px-24 border-b border-gray-400">
+    <div class="flex item-center  py-1">
+      <a class="" href="{% url 'core:home' %}">Home</a>     
+    </div>
+
+    <div class="flex items-center">
     {% if user.is_authenticated %}
-      <a href="{% url 'users:logout' %}">Log Out</a>
-      <a href="{% url 'users:profile' user.pk %}">My Profile</a>
+      <span class="mr-6 text-sm font-semibold tracking-tight hover:text-orange-400"><a href="{% url 'core:search' %}">Search</a></span>
+      <span class="mr-6 text-sm font-semibold tracking-tight hover:text-orange-400"><a href="{% url 'users:profile' user.pk %}">My Profile</a></span>
+      <span class="mr-6 text-sm font-semibold tracking-tight hover:text-orange-400"><a href="{% url 'favs:see-favs' %}">Favourites</a></span>
+      <span class="mr-6 text-sm font-semibold tracking-tight hover:text-orange-400"><a href="{% url 'users:logout' %}">Log Out</a></span>
     {% else %}
-      <a href="{% url 'users:login' %}">Log In</a>
-      <a href="{% url 'users:signup' %}">Sign Up</a>
+      <span class="mr-6 text-sm font-semibold tracking-tight hover:text-orange-400"><a href="{% url 'core:search' %}">Search</a></span>
+      <span class="mr-6 text-sm font-semibold tracking-tight hover:text-orange-400"><a href="{% url 'users:login' %}">Log In</a></span>
+      <span class="mr-6 text-sm font-semibold tracking-tight hover:text-orange-400"><a href="{% url 'users:signup' %}">Sign Up</a></span>
     {% endif %}
+    </div>
+  
+
   </header>

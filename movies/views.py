@@ -6,7 +6,7 @@ from reviews.forms import CreateReviewForm
 class MoviesView(ListView):
 
     model = Movie
-    paginate_by = 15
+    paginate_by = 12
     paginate_orphans = 5
     ordering = "-created_at"
     context_object_name = "movies"

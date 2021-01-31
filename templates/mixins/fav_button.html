@@ -1,7 +1,7 @@
 {% load on_favs %}
 {% on_favs obj as on_favs_boolean %}
 
-<a class="ml-5 bg-blue-400 hover:bg-blue-600 text-white font-bold mt-4 py-2 px-4 rounded" href="{% url 'favs:add' obj.pk %}?kind={{kind}}">
+<a class="bg-orange-400 hover:shadow-lg text-white font-semibold text-sm mt-4 py-1 px-2 rounded" href="{% url 'favs:add' obj.pk %}?kind={{kind}}">
 {% if on_favs_boolean %}
   
     Remove from favs!

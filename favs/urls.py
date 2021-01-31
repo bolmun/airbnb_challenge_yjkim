@@ -1,8 +1,9 @@
 from django.urls import path
-from favs.views import resolve_add
+from . import views
 
-app_name="favs"
+app_name = "favs"
 
 urlpatterns = [
-  path("toggle/<int:pk>", resolve_add, name="add"),
+    path("toggle/<int:pk>", views.resolve_add, name="add"),
+    path("list/", views.SeeFavsView.as_view(), name="see-favs"),
 ]

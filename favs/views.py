@@ -1,31 +1,38 @@
 from django.shortcuts import render, redirect, reverse
+from django.views.generic import TemplateView
 from favs.models import FavList
 from movies.models import Movie
 from books.models import Book
+from . import mixins
+
 
 def resolve_add(request, pk):
 
-  kind = request.GET.get('kind', 'movie')
-  
-  user = request.user
+    kind = request.GET.get("kind", "movie")
 
-  if user.is_authenticated:
+    user = request.user
 
-    fav_list, _ = FavList.objects.get_or_create(created_by=user)
+    if user.is_authenticated:
 
-    if kind == 'movie':
-      movie = Movie.objects.get(pk=pk)
-      if movie in fav_list.movies.all():
-        fav_list.movies.remove(movie)
-      else:
-        fav_list.movies.add(movie)
-      fav_list.save()
-      return redirect(reverse('movies:movie', kwargs={'pk': pk}))
-    else:
-      book = Book.objects.get(pk=pk)
-      if book in fav_list.books.all():
-        fav_list.books.remove(book)
-      else:
-        fav_list.books.add(book)
-      fav_list.save()
-      return redirect(reverse('books:book', kwargs={'pk': pk}))
+        fav_list, _ = FavList.objects.get_or_create(created_by=user)
+
+        if kind == "movie":
+            movie = Movie.objects.get(pk=pk)
+            if movie in fav_list.movies.all():
+                fav_list.movies.remove(movie)
+            else:
+                fav_list.movies.add(movie)
+            fav_list.save()
+            return redirect(reverse("movies:movie", kwargs={"pk": pk}))
+        else:
+            book = Book.objects.get(pk=pk)
+            if book in fav_list.books.all():
+                fav_list.books.remove(book)
+            else:
+                fav_list.books.add(book)
+            fav_list.save()
+            return redirect(reverse("books:book", kwargs={"pk": pk}))
+
+
+class SeeFavsView(TemplateView, mixins.LoginOnlyView):
+    template_name = "fav_list.html"

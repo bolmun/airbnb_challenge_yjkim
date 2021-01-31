@@ -1,4 +1,15 @@
-<div class="h-48 rounded shadow-lg p-2">
-  <h3 class="text-gray-900 text-base mb-2"><a href="{% url 'books:book' book.pk %}">{{book.title}}</a></h3>
-  <h5 class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{{book.year}}</h5>
+<div class="w-1/5 mb-6 mx-3 px-4 py-5 bg-gray-100 rounded-md hover:shadow-lg">
+  <div>
+    <span class="text-xs bg-gray-600 text-white px-1 py-px">{{book.year}}</span>
+    <span class="text-xs bg-indigo-600 text-white px-1 py-px">{{book.category}}</span>
+  </div>
+  <div class="h-64 bg-cover bg-center rounded-lg my-3 " style="background-image: url({{book.cover_image.url}});"></div>
+  <div>
+    <h2 class="font-bold text-lg pt-2"><a href="{% url 'books:book' book.pk %}">{{book.title}}</a></h2>
+    <span class="text-sm">written by {{book.writer}}</span>
+  </div>
+  <div class="flex justify-end items-center">
+    <i class="fas fa-star text-orange-500 text-sm mr-1"></i>
+    <span class="text-sm font-semibold">{{book.rating}}</span>
+  </div>
 </div>

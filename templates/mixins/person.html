@@ -1,4 +1,18 @@
-<div class="h-48 rounded shadow-lg p-2">
-    <h3 class="text-gray-900 text-base mb-2"><a href="{% url 'people:person' person.pk %}">{{person.name}}</a></h3>
-    <h5 class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{{person.kind}}</h5>
+
+<div class="w-1/5 mb-6 mx-3 px-4 py-5 bg-gray-100 rounded-md hover:shadow-lg">
+  <div class="flex items-center">
+    <span class="text-lg pl-1">
+        {% if person.kind == "actor" %}
+          <i class="fas fa-theater-masks"></i>
+        {% elif person.kind == "director" %}
+          <i class="fas fa-video"></i>
+        {% elif person.kind == "writer" %}
+          <i class="fas fa-feather"></i>
+        {% endif %}
+    <span class="text-sm px-2 py-px">{{person.kind}}</span>
   </div>
+  <div class="h-64 bg-cover bg-center rounded-lg my-3 " style="background-image: url({{person.photo.url}});"></div>
+  <h2 class="font-bold text-lg pt-2">
+    <a href="{% url 'people:person' person.pk %}">{{person.name}}</a>
+  </h2>
+</div>
