@@ -20,16 +20,33 @@
   <div class="inline-block bg-white shadow-md rounded-full px-3 py-1 text-sm font-semibold text-gray-700">{{i}}</div> {% endfor %}
 </div>
 <div class="flex">
-  <a class="bg-blue-400 hover:bg-blue-600 text-white font-bold mt-4 py-2 px-4 rounded" href="{% url 'movies:update' movie.pk %}">Edit Movie</a>
+  <a class="bg-blue-400 hover:bg-blue-600 text-white font-bold mt-4 py-2 px-4 rounded" href="{% url 'movies:update' movie.pk %}?type=movie">Edit Movie</a>
   {% if user.is_authenticated %}
     {% include "mixins/fav_button.html" with obj=movie kind='movie' %}
   {% endif %}
 </div>
 
 <div>
-
+  {% if user.is_authenticated %}
+  <div class="flex">
+    <a class="bg-blue-400 hover:bg-blue-600 text-white font-bold mt-4 py-2 px-4 rounded" href="{% url 'reviews:create-review' movie.pk %}?type=movie">Write Review</a>
+  </div>
+  {% endif %}
 </div>
-  Write Review
+
+<div>
+  <span>{{movie.reviews.count}}</span>
+  <span>review{{movie.reviews.count|pluralize}}</span>
+</div>
+<div>
+  {% for review in movie.reviews.all %}
+    {{review.created_by}}
+    {{review.created_at}}
+    {{review.text}}
+    {{review.rating}}
+  {% endfor %}
+</div>
+
 </div>
 
 {% endblock content %}
